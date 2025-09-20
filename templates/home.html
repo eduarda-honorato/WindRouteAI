@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUIA FAST - Solução de Rota</title>
+    <link rel="stylesheet" href="style_main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Partículas animadas -->
+        <div class="particles" id="particles"></div>
+        
+        <!-- Formas flutuantes -->
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        
+        <div class="left-panel">
+            <div class="logo-container">
+                <img src="logo.png" alt="GUIA FAST Logo" class="logo">
+                <div class="logo-text">GUIA FAST</div>
+
+                <p class="subtitle">
+                    Rotas otimizadas para fazer da sua viagem a melhor experiência possível
+                </p>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <h2 class="menu-header">Menu</h2>
+            
+            <a href="metodos_basicos.html" class="menu-link">
+                <div class="menu-item">
+                    <span>🧭</span> Métodos básicos
+                </div>
+            </a>
+            
+            <a href="algoritmos_geneticos.html" class="menu-link">
+                <div class="menu-item">
+                    <span>🧬</span> Algoritmos genéticos
+                </div>
+            </a>
+            
+            <div id="descricao-problema" class="menu-item">
+                <span>📋</span> Descrição do problema
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal-descricao-problema" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-descricao-problema')">&times;</span>
+            <h2>📋 Descrição do Problema</h2>
+            <p>O problema do caixeiro viajante consiste em encontrar o caminho mais curto para visitar um conjunto de cidades e retornar ao ponto de origem. Esse problema pode ser aplicado na formulação de roteiros turísticos para otimizar trajetos e minimizar tempo de deslocamento.</p>
+            <br>
+            <p><strong>Desenvolvido por:</strong> Maria Eduarda Honorato</p>
+        </div>
+    </div>
+
+    <script>
+        // Criar partículas animadas
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Funções dos modais
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+        }
+
+        // Event listeners
+        document.getElementById('descricao-problema').addEventListener('click', () => openModal('modal-descricao-problema'));
+
+        // Fechar modal ao clicar fora dele
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        });
+
+        // Inicializar partículas quando a página carregar
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+</html>
