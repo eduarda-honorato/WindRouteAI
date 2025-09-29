@@ -63,42 +63,90 @@ function executarRota() {
         document.getElementById('pathResult').style.display = 'block';
 
         if (data.error) {
-            pathResult.innerHTML = `<p style="color:red;">${data.error}</p>`;
-            mapPlaceholder.textContent = 'Erro ao calcular rota.';
+            document.getElementById('pathResult').innerHTML = `<p style="color:red;">${data.error}</p>`;
+            // Mantém o grafo, apenas mostra erro
             return;
         }
 
         document.getElementById('pathResult').textContent =
             "Caminho: " + data.caminho.join(" → ");
 
-        desenharGrafo(data.nos, data.grafo, data.caminho);
+        // Atualiza o grafo com o novo caminho
+        desenharGrafo(data.nos, data.grafo, data.caminho, data.posicoes);
     })
     .catch(err => console.error("Erro:", err));
 }
 
 ////////////////////////////////////////////////////
 let network;
-function desenharGrafo(nos, grafo, caminho) {
+function desenharGrafo(nos, grafo, caminho, posicoes) {
     const container = document.querySelector(".map-container");
 
-    // cria os nós
-    const nodes = new vis.DataSet(nos.map(n => ({ id: n, label: n })));
+    // cria os nós com posições fixas
+    const nodes = new vis.DataSet(nos.map(n => ({ 
+        id: n, 
+        label: n,
+        x: posicoes[n].x,
+        y: posicoes[n].y,
+        fixed: true,  // impede que o nó se mova
+        color: {
+            border: "#2B7CE9",
+            background: "#97C2FC"
+        }
+    })));
 
-    // cria as arestas
+    // cria as arestas (evitando duplicatas)
     const edgesArr = [];
+    const addedEdges = new Set();
+    
     grafo.forEach((viz, i) => {
         viz.forEach(v => {
-            edgesArr.push({ from: nos[i], to: v });
+            const from = nos[i];
+            const to = v;
+            // Cria uma chave única para a aresta (ordenada para evitar duplicatas)
+            const edgeKey = [from, to].sort((a, b) => a.localeCompare(b)).join('-');
+            
+            if (!addedEdges.has(edgeKey)) {
+                edgesArr.push({ from, to });
+                addedEdges.add(edgeKey);
+            }
         });
     });
     const edges = new vis.DataSet(edgesArr);
 
     const data = { nodes, edges };
     const options = {
-        nodes: { shape: "dot", size: 20 },
-        edges: { color: "gray", arrows: "to" },
-        //physics: false
-        physics: { stabilization: true }, // Física para organizar melhor
+        nodes: { 
+            shape: "dot", 
+            size: 25,
+            font: {
+                size: 14,
+                color: "white"
+            },
+            borderWidth: 2,
+            color: {
+                border: "#2B7CE9",
+                background: "#97C2FC"
+            }
+        },
+        edges: { 
+            color: "gray", 
+            arrows: {
+                to: {
+                    enabled: false  // Remove as setas
+                }
+            },
+            length: 150,
+            smooth: {
+                enabled: true,
+                type: "continuous",
+                roundness: 0.1
+            }
+        },
+        physics: false,
+        layout: {
+            randomSeed: 42  // garante layout consistente
+        }
     };
 
     network = new vis.Network(container, data, options);
@@ -109,10 +157,25 @@ function desenharGrafo(nos, grafo, caminho) {
             const a = caminho[i], b = caminho[i + 1];
             edges.forEach(edge => {
                 if ((edge.from === a && edge.to === b) || (edge.from === b && edge.to === a)) {
-                    edges.update({ id: edge.id, color: { color: "green" }, width: 4 });
+                    edges.update({ 
+                        id: edge.id, 
+                        color: { color: "#00ff00" }, 
+                        width: 4
+                    });
                 }
             });
         }
+        
+        // Destaca os nós do caminho
+        caminho.forEach(nodeId => {
+            nodes.update({
+                id: nodeId,
+                color: {
+                    border: "#00aa00",
+                    background: "#66ff66"
+                }
+            });
+        });
     }
 }
 //
@@ -134,4 +197,24 @@ document.querySelectorAll('.input-field, .select-field').forEach(field => {
 });
 
 // Carregar tema ao inicializar a página
-document.addEventListener('DOMContentLoaded', loadTheme);
+document.addEventListener('DOMContentLoaded', function() {
+    loadTheme();
+    carregarGrafoInicial();
+});
+
+// Função para carregar o grafo inicial sem caminho
+function carregarGrafoInicial() {
+    fetch('/graph-data')
+    .then(res => res.json())
+    .then(data => {
+        // Remove o placeholder e desenha o grafo
+        const container = document.querySelector(".map-container");
+        const placeholder = container.querySelector(".map-placeholder");
+        if (placeholder) {
+            placeholder.remove();
+        }
+        
+        desenharGrafo(data.nos, data.grafo, [], data.posicoes);
+    })
+    .catch(err => console.error("Erro ao carregar grafo inicial:", err));
+}
