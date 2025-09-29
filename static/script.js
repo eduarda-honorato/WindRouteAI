@@ -68,8 +68,12 @@ function executarRota() {
             return;
         }
 
-        document.getElementById('pathResult').textContent =
-            "Caminho: " + data.caminho.join(" → ");
+        // Exibe o caminho e o custo
+        const caminhoTexto = data.caminho.length > 0 ? data.caminho.join(" → ") : "Nenhum caminho encontrado";
+        const custoTexto = data.custo > 0 ? `<br><strong>Custo: ${data.custo} passos</strong>` : "";
+        
+        document.getElementById('pathResult').innerHTML = 
+            `<strong>Caminho:</strong> ${caminhoTexto}${custoTexto}`;
 
         // Atualiza o grafo com o novo caminho
         desenharGrafo(data.nos, data.grafo, data.caminho, data.posicoes);
@@ -79,19 +83,42 @@ function executarRota() {
 
 ////////////////////////////////////////////////////
 let network;
+
+// Função para criar SVG de turbina eólica
+function criarTurbinaSVG(cor = "#97C2FC", corBorda = "#2B7CE9") {
+    const svg = '<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">' +
+        '<!-- Base da turbina -->' +
+        '<line x1="20" y1="35" x2="20" y2="15" stroke="' + corBorda + '" stroke-width="2"/>' +
+        '<!-- Centro da turbina -->' +
+        '<circle cx="20" cy="15" r="2" fill="' + corBorda + '"/>' +
+        '<!-- Pás da turbina -->' +
+        '<path d="M20,15 L18,5 Q20,8 22,5 Z" fill="' + cor + '" stroke="' + corBorda + '" stroke-width="1"/>' +
+        '<path d="M20,15 L10,18 Q13,20 10,22 Z" fill="' + cor + '" stroke="' + corBorda + '" stroke-width="1"/>' +
+        '<path d="M20,15 L30,18 Q27,20 30,22 Z" fill="' + cor + '" stroke="' + corBorda + '" stroke-width="1"/>' +
+        '</svg>';
+    
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
 function desenharGrafo(nos, grafo, caminho, posicoes) {
     const container = document.querySelector(".map-container");
 
-    // cria os nós com posições fixas
+    // cria os nós com posições fixas usando imagem de turbina
     const nodes = new vis.DataSet(nos.map(n => ({ 
         id: n, 
         label: n,
         x: posicoes[n].x,
         y: posicoes[n].y,
         fixed: true,  // impede que o nó se mova
-        color: {
-            border: "#2B7CE9",
-            background: "#97C2FC"
+        shape: "image",
+        image: criarTurbinaSVG(),
+        size: 30,
+        font: {
+            size: 12,
+            color: "white",
+            background: "rgba(0,0,0,0.7)",
+            strokeWidth: 1,
+            strokeColor: "black"
         }
     })));
 
@@ -117,17 +144,16 @@ function desenharGrafo(nos, grafo, caminho, posicoes) {
     const data = { nodes, edges };
     const options = {
         nodes: { 
-            shape: "dot", 
-            size: 25,
+            shape: "image", 
+            size: 30,
             font: {
-                size: 14,
-                color: "white"
+                size: 12,
+                color: "white",
+                background: "rgba(0,0,0,0.7)",
+                strokeWidth: 1,
+                strokeColor: "black"
             },
-            borderWidth: 2,
-            color: {
-                border: "#2B7CE9",
-                background: "#97C2FC"
-            }
+            borderWidth: 0
         },
         edges: { 
             color: "gray", 
@@ -166,14 +192,11 @@ function desenharGrafo(nos, grafo, caminho, posicoes) {
             });
         }
         
-        // Destaca os nós do caminho
+        // Destaca os nós do caminho com turbinas verdes
         caminho.forEach(nodeId => {
             nodes.update({
                 id: nodeId,
-                color: {
-                    border: "#00aa00",
-                    background: "#66ff66"
-                }
+                image: criarTurbinaSVG("#66ff66", "#00aa00")
             });
         });
     }

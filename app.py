@@ -100,14 +100,18 @@ def search():
     elif metodo == "profundidade":
         caminho = buscador.profundidade(inicio, objetivo, nos, grafo)
     elif metodo == "profundidade-limitada":
-        caminho = buscador.prof_limitada(inicio, objetivo, nos, grafo, lim=3)
+        caminho = buscador.prof_limitada(inicio, objetivo, nos, grafo, lim=6)
     elif metodo == "aprofundamento-iterativo":
-        caminho = buscador.aprof_iterativo(inicio, objetivo, nos, grafo, lim_max=5)
+        caminho = buscador.aprof_iterativo(inicio, objetivo, nos, grafo, lim_max=10)
     else:
         caminho = buscador.bidirecional(inicio, objetivo, nos, grafo)
 
+    # Calcula o custo do caminho (número de passos)
+    custo = len(caminho) - 1 if caminho and len(caminho) > 1 else 0
+
     return jsonify({
         "caminho": caminho if caminho else [],
+        "custo": custo,
         "nos": nos,
         "grafo": grafo,
         "posicoes": posicoes_nos
