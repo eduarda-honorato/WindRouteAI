@@ -38,7 +38,7 @@ def home():
     return render_template("home.html")
 
 @app.route("/methods/bnp")
-def algoritmos_bnp():
+def methods_bnp():
     return render_template("algoritmos_bnp.html")
 
 @app.route("/graph")
