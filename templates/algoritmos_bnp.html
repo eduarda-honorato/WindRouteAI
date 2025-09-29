@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 </head>
-<body> 
+
+<body>
     <div class="header">
         <div class="logo">WindRouteAI</div>
         <div class="theme-toggle" onclick="toggleTheme()">
@@ -21,12 +23,24 @@
             <div class="control-panel">
                 <div class="input-group">
                     <label for="inicio">Início</label>
-                    <input type="text" id="inicio" class="input-field" placeholder="Digite o local de início">
+                    <!-- <input type="text" id="inicio" class="input-field" placeholder="Digite o local de início"> -->
+                    <select id="inicio" class="input-field">
+                        <option value="">Selecione o local de início</option>
+                        {% for t in nos %}
+                        <option value="{{ t }}">{{ t }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
                 <div class="input-group">
                     <label for="objetivo">Objetivo</label>
-                    <input type="text" id="objetivo" class="input-field" placeholder="Digite o destino">
+                    <!-- <input type="text" id="objetivo" class="input-field" placeholder="Digite o destino"> -->
+                    <select id="objetivo" class="input-field">
+                        <option value="">Selecione o objetivo</option>
+                        {% for t in nos %}
+                        <option value="{{ t }}">{{ t }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
 
                 <div class="input-group">
@@ -34,11 +48,11 @@
                     <div class="method-select">
                         <select id="metodo" class="select-field">
                             <option value="">Selecione o método</option>
-                            <option value="rapido">Amplitude</option>
-                            <option value="economico">Profundidade</option>
-                            <option value="panoramico">Profundidade Limitada</option>
-                            <option value="evitar-pedagios">Aprofundamento Iterativo</option>
-                            <option value="rapido">Bidirecional</option>
+                            <option value="amplitude">Amplitude</option>
+                            <option value="profundidade">Profundidade</option>
+                            <option value="profundidade-limitada">Profundidade Limitada</option>
+                            <option value="aprofundamento-iterativo">Aprofundamento Iterativo</option>
+                            <option value="bidirecional">Bidirecional</option>
                         </select>
                         <div class="select-arrow">▼</div>
                     </div>
@@ -69,4 +83,5 @@
         document.addEventListener("DOMContentLoaded", loadTheme);
     </script>
 </body>
+
 </html>

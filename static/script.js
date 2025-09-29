@@ -44,8 +44,8 @@ function executarRota() {
     const objetivo = document.getElementById('objetivo').value;
     const metodo = document.getElementById('metodo').value;
 
-    if (!inicio || !objetivo) {
-        alert('Por favor, preencha os campos de início e objetivo.');
+    if (!inicio || !objetivo || !metodo) {
+        alert('Por favor, preencha os campos de início, objetivo e método.');
         return;
     }
 
