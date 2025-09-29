@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GUIA FAST - Solução de Rota</title>
-    <link rel="stylesheet" href="style_main.css">
+    <title>WindRouteAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_home.css') }}">
 </head>
 <body>
     <div class="container">
@@ -20,11 +20,11 @@
         
         <div class="left-panel">
             <div class="logo-container">
-                <img src="logo.png" alt="GUIA FAST Logo" class="logo">
-                <div class="logo-text">GUIA FAST</div>
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="WindRouteAI Logo" class="logo">
+                <div class="logo-text">WindRouteAI</div>
 
                 <p class="subtitle">
-                    Rotas otimizadas para fazer da sua viagem a melhor experiência possível
+                    pensar no que colocar
                 </p>
             </div>
         </div>
@@ -32,32 +32,32 @@
         <div class="right-panel">
             <h2 class="menu-header">Menu</h2>
             
-            <a href="metodos_basicos.html" class="menu-link">
+            <a href="{{ url_for('algoritmos_bnp') }}" class="menu-link">
                 <div class="menu-item">
-                    <span>🧭</span> Métodos básicos
+                    <span>🧭</span> Algoritmos de busca não ponderada
                 </div>
             </a>
             
-            <a href="algoritmos_geneticos.html" class="menu-link">
+            <a href="algoritmos_bp.html" class="menu-link">
                 <div class="menu-item">
-                    <span>🧬</span> Algoritmos genéticos
+                    <span>🧬</span> Algoritmos de busca ponderada
                 </div>
             </a>
             
-            <div id="descricao-problema" class="menu-item">
-                <span>📋</span> Descrição do problema
+            <div id="sobre" class="menu-item" onclick="openModal('modal-sobre')">
+                <span>📋</span> Sobre
             </div>
         </div>
     </div>
 
     <!-- Modal -->
-    <div id="modal-descricao-problema" class="modal">
+    <div id="modal-sobre" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('modal-descricao-problema')">&times;</span>
-            <h2>📋 Descrição do Problema</h2>
-            <p>O problema do caixeiro viajante consiste em encontrar o caminho mais curto para visitar um conjunto de cidades e retornar ao ponto de origem. Esse problema pode ser aplicado na formulação de roteiros turísticos para otimizar trajetos e minimizar tempo de deslocamento.</p>
+            <span class="close-btn" onclick="closeModal('modal-sobre')">&times;</span>
+            <h2>📋 Sobre</h2>
+            <p>botar um textinho</p>
             <br>
-            <p><strong>Desenvolvido por:</strong> Maria Eduarda Honorato</p>
+            <p><strong>Desenvolvido por:</strong> Maria Eduarda Honorato e Matheus Jardim</p>
         </div>
     </div>
 
