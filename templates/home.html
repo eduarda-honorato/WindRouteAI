@@ -8,10 +8,8 @@
 </head>
 <body>
     <div class="container">
-        <!-- Partículas animadas -->
         <div class="particles" id="particles"></div>
         
-        <!-- Formas flutuantes -->
         <div class="floating-shapes">
             <div class="shape"></div>
             <div class="shape"></div>
@@ -62,7 +60,6 @@
     </div>
 
     <script>
-        // Criar partículas animadas
         function createParticles() {
             const particles = document.getElementById('particles');
             const particleCount = 50;
@@ -78,7 +75,6 @@
             }
         }
 
-        // Funções dos modais
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
             modal.style.display = 'flex';
@@ -89,17 +85,14 @@
             modal.style.display = 'none';
         }
 
-        // Event listeners
         document.getElementById('descricao-problema').addEventListener('click', () => openModal('modal-descricao-problema'));
 
-        // Fechar modal ao clicar fora dele
         window.addEventListener('click', function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = 'none';
             }
         });
 
-        // Inicializar partículas quando a página carregar
         window.addEventListener('load', createParticles);
     </script>
 </body>

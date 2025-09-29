@@ -274,7 +274,6 @@ body {
     font-size: 14px;
 }
 
-/* Scrollbar customization */
 .path-content::-webkit-scrollbar {
     width: 6px;
 }
@@ -293,7 +292,6 @@ body {
     background: rgba(74, 158, 255, 0.7);
 }
 
-/* Responsive design */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;

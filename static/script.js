@@ -1,4 +1,4 @@
-// Função para alternar entre temas
+// função para alternar entre temas
 function toggleTheme() {
     const body = document.body;
     const themeText = document.getElementById('theme-text');
@@ -7,13 +7,11 @@ function toggleTheme() {
     const isLightMode = body.getAttribute('data-theme') === 'light';
 
     if (isLightMode) {
-        // Mudar para tema escuro
         body.removeAttribute('data-theme');
         if (themeText) themeText.textContent = 'Tema Claro';
         if (themeIcon) themeIcon.textContent = '☀️';
         localStorage.setItem('theme', 'dark');
     } else {
-        // Mudar para tema claro
         body.setAttribute('data-theme', 'light');
         if (themeText) themeText.textContent = 'Tema Escuro';
         if (themeIcon) themeIcon.textContent = '🌙';
@@ -21,7 +19,6 @@ function toggleTheme() {
     }
 }
 
-// Carregar tema salvo ao inicializar
 function loadTheme() {
     const savedTheme = localStorage.getItem('theme');
     const body = document.body;
@@ -64,7 +61,6 @@ function executarRota() {
 
         if (data.error) {
             document.getElementById('pathResult').innerHTML = `<p style="color:red;">${data.error}</p>`;
-            // Mantém o grafo, apenas mostra erro
             return;
         }
 
@@ -75,13 +71,11 @@ function executarRota() {
         document.getElementById('pathResult').innerHTML = 
             `<strong>Caminho:</strong> ${caminhoTexto}${custoTexto}`;
 
-        // Atualiza o grafo com o novo caminho
         desenharGrafo(data.nos, data.grafo, data.caminho, data.posicoes);
     })
     .catch(err => console.error("Erro:", err));
 }
 
-////////////////////////////////////////////////////
 let network;
 
 // Função para criar SVG de turbina eólica
@@ -177,7 +171,6 @@ function desenharGrafo(nos, grafo, caminho, posicoes) {
 
     network = new vis.Network(container, data, options);
 
-    // destaca caminho (se existir)
     if (caminho && caminho.length > 1) {
         for (let i = 0; i < caminho.length - 1; i++) {
             const a = caminho[i], b = caminho[i + 1];
@@ -192,7 +185,6 @@ function desenharGrafo(nos, grafo, caminho, posicoes) {
             });
         }
         
-        // Destaca os nós do caminho com turbinas verdes
         caminho.forEach(nodeId => {
             nodes.update({
                 id: nodeId,
@@ -219,18 +211,16 @@ document.querySelectorAll('.input-field, .select-field').forEach(field => {
     });
 });
 
-// Carregar tema ao inicializar a página
 document.addEventListener('DOMContentLoaded', function() {
     loadTheme();
     carregarGrafoInicial();
 });
 
-// Função para carregar o grafo inicial sem caminho
+// função para carregar o grafo inicial sem caminho
 function carregarGrafoInicial() {
     fetch('/graph-data')
     .then(res => res.json())
     .then(data => {
-        // Remove o placeholder e desenha o grafo
         const container = document.querySelector(".map-container");
         const placeholder = container.querySelector(".map-placeholder");
         if (placeholder) {

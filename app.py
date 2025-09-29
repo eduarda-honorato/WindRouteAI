@@ -94,7 +94,6 @@ def search():
     if inicio not in nos or objetivo not in nos:
         return jsonify({"error": "Nó inválido"}), 400
 
-    # método
     if metodo == "amplitude":
         caminho = buscador.amplitude(inicio, objetivo, nos, grafo)
     elif metodo == "profundidade":

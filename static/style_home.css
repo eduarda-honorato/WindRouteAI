@@ -17,7 +17,6 @@ body {
     position: relative;
 }
 
-/* Partículas animadas de fundo */
 .particles {
     position: absolute;
     width: 100%;
@@ -150,7 +149,6 @@ body {
     color: inherit;
 }
 
-/* Modal moderno */
 .modal {
     display: none;
     position: fixed;
@@ -214,7 +212,6 @@ body {
     color: #ef4444;
 }
 
-/* Efeitos visuais extras */
 .floating-shapes {
     position: absolute;
     width: 100%;
@@ -261,7 +258,6 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
