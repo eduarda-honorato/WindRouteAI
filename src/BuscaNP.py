@@ -1,5 +1,5 @@
 from collections import deque
-from Node import Node
+from src.Node import Node
 
 class buscaNP(object):
     #--------------------------------------------------------------------------
@@ -43,7 +43,7 @@ class buscaNP(object):
     #--------------------------------------------------------------------------
     # BUSCA EM AMPLITUDE
     #--------------------------------------------------------------------------
-        def amplitude(self,inicio,fim,nos,grafo):   # grafo
+    def amplitude(self,inicio,fim,nos,grafo):   # grafo
         # Finaliza se início for igual a objetivo
         if inicio == fim:
             return [inicio]
@@ -173,7 +173,7 @@ class buscaNP(object):
             if inicio == fim:
                 return [inicio]
             
-             transforma em tupla
+            #transforma em tupla
             
             # Lista para árvore de busca - FILA
             fila = deque()
