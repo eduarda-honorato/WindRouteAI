@@ -8,26 +8,26 @@ buscador = buscaNP()
 nos = [f"T{i}" for i in range(1, 21)]
 
 grafo = [
-    ["T2", "T6", "T14"],             
-    ["T1", "T3", "T5", "T6"],              
-    ["T2", "T4", "T8"],              
-    ["T3"],                          
-    ["T2", "T18"],                   
-    ["T1", "T2", "T7", "T10", "T12", "T17"],      
-    ["T6", "T14"],                   
-    ["T3", "T9"],                    
-    ["T8", "T13", "T16", "T19"],     
-    ["T6", "T12", "T16"],     
-    ["T13", "T16"],           
-    ["T6", "T10"],                          
-    ["T9", "T11"],                   
-    ["T1", "T7", "T15"],                   
-    ["T14", "T20"],            
-    ["T9", "T10", "T11"],            
-    ["T6"],                         
-    ["T5"],                          
-    ["T9"],                          
-    ["T15"]                          
+    ["T2", "T6", "T14"],                #T1     
+    ["T1", "T3", "T5"],                 #T2         
+    ["T2", "T4", "T8"],                 #T3             
+    ["T3"],                             #T4              
+    ["T2", "T18"],                      #T5   
+    ["T1", "T7", "T10", "T12", "T17"],  #T6    
+    ["T6", "T14"],                      #T7  
+    ["T3", "T9"],                       #T8
+    ["T8", "T13", "T16", "T19"],        #T9 
+    ["T6", "T12", "T16"],               #T10 
+    ["T13", "T16"],                     #T11          
+    ["T6", "T10"],                      #T12          
+    ["T9", "T11"],                      #T13            
+    ["T1", "T7", "T15"],                #T14                  
+    ["T14", "T20"],                     #T15         
+    ["T9", "T10", "T11"],               #T16           
+    ["T6"],                             #T17                
+    ["T5"],                             #T18                     
+    ["T9"],                             #T19                    
+    ["T15"]                             #T20                     
 ]
 
 
@@ -101,11 +101,10 @@ def search():
     elif metodo == "profundidade-limitada":
         caminho = buscador.prof_limitada(inicio, objetivo, nos, grafo, lim=6)
     elif metodo == "aprofundamento-iterativo":
-        caminho = buscador.aprof_iterativo(inicio, objetivo, nos, grafo, lim_max=10)
+        caminho = buscador.aprof_iterativo(inicio, objetivo, nos, grafo, lim_max=9)
     else:
         caminho = buscador.bidirecional(inicio, objetivo, nos, grafo)
 
-    # Calcula o custo do caminho (número de passos)
     custo = len(caminho) - 1 if caminho and len(caminho) > 1 else 0
 
     return jsonify({
