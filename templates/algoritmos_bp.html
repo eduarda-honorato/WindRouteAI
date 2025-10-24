@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WindRouteAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <a href="{{ url_for('home') }}" class="menu-link">
+            <h1>WindRouteAI</h1>
+        </a>
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <span id="theme-text">Tema Claro</span>
+            <span id="theme-icon">☀️</span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="left-panel">
+            <div class="control-panel">
+                <div class="input-group">
+                    <label for="inicio">Início</label>
+                    <!-- <input type="text" id="inicio" class="input-field" placeholder="Digite o local de início"> -->
+                    <select id="inicio" class="input-field">
+                        <option value="">Selecione o local de início</option>
+                        {% for t in nos %}
+                        <option value="{{ t }}">{{ t }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="objetivo">Objetivo</label>
+                    <!-- <input type="text" id="objetivo" class="input-field" placeholder="Digite o destino"> -->
+                    <select id="objetivo" class="input-field">
+                        <option value="">Selecione o objetivo</option>
+                        {% for t in nos %}
+                        <option value="{{ t }}">{{ t }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="metodo">Método</label>
+                    <div class="method-select">
+                        <select id="metodo" class="select-field" required>
+                            <option value="">Selecione o método</option>
+                            <option value="custo-uniforme">Custo Uniforme</option>
+                            <option value="greedy">Greedy</option>
+                            <option value="a-estrela">A-Estrela</option>
+                            <option value="aia-estrela">AIA-Estrela</option>
+                        </select>
+                        <div class="select-arrow">▼</div>
+                    </div>
+                </div>
+
+                <button class="execute-btn" onclick="executarRota()">Executar</button>
+            </div>
+
+            <div class="path-panel">
+                <div class="path-title">Caminho:</div>
+                <div class="path-content">
+                    <div class="loading" id="loading">Calculando rota...</div>
+                    <div class="path-result" id="pathResult"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="map-container">
+                <div class="map-placeholder">Carregando parque eólico...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script_bp.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", loadTheme);
+    </script>
+</body>
+
+</html>
