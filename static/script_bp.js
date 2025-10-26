@@ -64,14 +64,22 @@ function executarRota() {
             return;
         }
 
-        // Exibe o caminho e o custo
-        const caminhoTexto = data.caminho.length > 0 ? data.caminho.join(" → ") : "Nenhum caminho encontrado";
-        const custoTexto = data.custo > 0 ? `<br><strong>Custo: ${data.custo} passos</strong>` : "";
-        
-        document.getElementById('pathResult').innerHTML = 
-            `<strong>Caminho:</strong> ${caminhoTexto}${custoTexto}`;
+        const caminho = Array.isArray(data.caminho) ? data.caminho : [];
+        const custo = Number(data.custo) || 0;
+        const passos = caminho.length > 0 ? caminho.length - 1 : 0;
 
-        desenharGrafoPesos(data.nos, data.grafo_com_pesos, data.caminho, data.posicoes);
+        // --- Exibe o resultado formatado ---
+        const caminhoTexto = caminho.length > 0 
+            ? caminho.join(" -> ") 
+            : "Nenhum caminho encontrado";
+
+        document.getElementById('pathResult').innerHTML = `
+            <strong>${caminhoTexto}</strong><br>
+            Custo = ${custo}<br>
+            Passos = ${passos}
+        `;
+
+        desenharGrafoPesos(data.nos, data.grafo_com_pesos, caminho, data.posicoes);
     })
     .catch(err => console.error("Erro:", err));
 }
