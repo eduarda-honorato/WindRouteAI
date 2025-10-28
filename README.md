@@ -74,8 +74,8 @@ A página inicial do **WindRouteAI** será exibida com o menu principal.
 
 # Exemplo de uso
 
-1. Escolha o ponto de partida: **T3**
-2. Escolha o ponto de partida: **T16**
+1. Escolha o ponto de partida: **T3** ou **T20**
+2. Escolha o ponto de partida: **T16** ou **T8**
 3. Selecione um método na lista.
 4. Clique em Executar.
 5. Analise os resultados obtidos. 
