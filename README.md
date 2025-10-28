@@ -39,7 +39,7 @@ A página inicial do **WindRouteAI** será exibida com o menu principal.
 
 # Navegação básica
 
-- Na página inicial, clique em "Algoritmos de busca não ponderada" para acessar a ferramenta de otimização de rotas.
+- Na página inicial, clique em "Algoritmos de busca não ponderada" ou "Algoritmos de busca ponderada" para acessar a ferramenta de otimização de rotas.
 - Para voltar à página inicial a qualquer momento, clique no nome do programa "WindRouteAI" no canto superior esquerdo.
 
 ---
@@ -49,18 +49,24 @@ A página inicial do **WindRouteAI** será exibida com o menu principal.
 1. Definição do problema
     - No campo Início, escolha uma turbina da lista.
     - No campo Objetivo, escolha uma turbina da lista.
-    - No campo Métodos, selecione um dos algoritmos:
+    - No campo Métodos na página "Algoritmos de busca não ponderada", selecione um dos algoritmos:
         > Amplitude
         > Profundidade
         > Profundidade Limitada
         > Aprofundamento Iterativo
         > Bidirecional
+    - No campo Métodos na página "Algoritmos de busca ponderada", selecione um dos algoritmos:
+        > Custo Uniforme
+        > Greedy
+        > A-Estrela
+        > AIA-Estrela
     - Clique em Executar para visualizar o caminho.
 
 2. Interpretação dos resultados
     - Caminho gerado no grafo
     - Caminho em lista de turbinas
-    - Custo do percurso (número de passos)
+    - Custo do percurso (para os métodos de busca ponderada)
+    - Número de passos
     - Caso não exista solução nos métodos Profundidade Limitada (lim=6) ou Aprofundamento Iterativo (lim_max=9), será exibido:
         "Nenhum caminho encontrado"
 
