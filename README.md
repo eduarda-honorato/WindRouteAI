@@ -6,9 +6,9 @@ O **WindRouteAI** é um sistema para **planejamento de rotas de manutenção té
 
 # Requisitos
 
-- Python 3.8+  
-- Navegador web (Chrome, Firefox, Edge ou Safari)  
-- Biblioteca Flask  
+- Python 3.8+
+- Navegador web (Chrome, Firefox, Edge ou Safari)
+- Biblioteca Flask
 
 Instale as dependências com:
 
@@ -47,38 +47,39 @@ A página inicial do **WindRouteAI** será exibida com o menu principal.
 # Como usar a ferramenta
 
 1. Definição do problema
-    - No campo Início, escolha uma turbina da lista.
-    - No campo Objetivo, escolha uma turbina da lista.
-    - No campo Métodos na página "Algoritmos de busca não ponderada", selecione um dos algoritmos:
-        > Amplitude
-        > Profundidade
-        > Profundidade Limitada
-        > Aprofundamento Iterativo
-        > Bidirecional
-    - No campo Métodos na página "Algoritmos de busca ponderada", selecione um dos algoritmos:
-        > Custo Uniforme
-        > Greedy
-        > A-Estrela
-        > AIA-Estrela
-    - Clique em Executar para visualizar o caminho.
+
+   - No campo Início, escolha uma turbina da lista.
+   - No campo Objetivo, escolha uma turbina da lista.
+   - No campo Métodos na página "Algoritmos de busca não ponderada", selecione um dos algoritmos:
+     > Amplitude
+     > Profundidade
+     > Profundidade Limitada
+     > Aprofundamento Iterativo
+     > Bidirecional
+   - No campo Métodos na página "Algoritmos de busca ponderada", selecione um dos algoritmos:
+     > Custo Uniforme
+     > Greedy
+     > A-Estrela
+     > AIA-Estrela
+   - Clique em Executar para visualizar o caminho.
 
 2. Interpretação dos resultados
-    - Caminho gerado no grafo
-    - Caminho em lista de turbinas
-    - Custo do percurso (para os métodos de busca ponderada)
-    - Número de passos
-    - Caso não exista solução nos métodos Profundidade Limitada (lim=6) ou Aprofundamento Iterativo (lim_max=9), será exibido:
-        "Nenhum caminho encontrado"
+   - Caminho gerado no grafo
+   - Caminho em lista de turbinas
+   - Custo do percurso (para os métodos de busca ponderada)
+   - Número de passos
+   - Caso não exista solução nos métodos Profundidade Limitada (lim=6) ou Aprofundamento Iterativo (lim_max=9), será exibido:
+     "Nenhum caminho encontrado"
 
 ---
 
 # Exemplo de uso
 
-1. Escolha o ponto de partida: **T3** ou **T20**
-2. Escolha o ponto de partida: **T16** ou **T8**
+1. Escolha o ponto de partida: **T3**.
+2. Escolha o ponto de destino: **T16**.
 3. Selecione um método na lista.
 4. Clique em Executar.
-5. Analise os resultados obtidos. 
+5. Analise os resultados obtidos.
 
 ---
 
